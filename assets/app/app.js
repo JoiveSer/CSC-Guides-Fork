@@ -2,8 +2,8 @@
   'use strict';
 
   const offline = window.CSK_OFFLINE_DATA || { classes: [], tips: [], useful: [] };
-  const duo = window.CSK_DUO_DATA || { classes: [], topPairs: [], rules: [] };
-  const allDuo = window.CSK_DUO_IMBA_V2 || { pairCount: 0, characters: [], pairs: [] };
+  const duo = window.CSK_DUO_DATA_V3 || { classes: [], topPairs: [], rules: [] };
+  const allDuo = window.CSK_DUO_V3 || { pair_count: 0, characters: [], topPairs: [], pairs: [] };
   const classes = Array.isArray(offline.classes) ? offline.classes : [];
   const duoClasses = Array.isArray(duo.classes) ? duo.classes : [];
   const classByName = new Map(classes.map(item => [item.name, item]));
@@ -191,7 +191,7 @@
     const topContainer = $('#homeTopPairsV2');
     if (!first || !second || !result || !battlePlan || !topContainer) return;
 
-    $('#homeV2PairCount').textContent = allDuo.pairCount || imbaPairs.length;
+    $('#homeV2PairCount').textContent = allDuo.pair_count || allDuo.pairCount || imbaPairs.length;
     $('#homeV2ClassCount').textContent = imbaCharacters.length || classes.length;
     const options = imbaCharacters.map(name => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('');
     first.innerHTML = options;
@@ -301,16 +301,19 @@
   function renderDuoBody(item) {
     if (state.drawerTab === 'pairs') {
       const pairs = item.pairs || [];
-      return `<section class="drawer-section"><div class="drawer-section-title">Лучшие союзники</div><div class="pair-list">${pairs.map(pair => `<button class="pair-row" type="button" data-open-duo="${escapeHtml(pair.name)}"><img src="${escapeHtml(iconFor(pair.name))}" alt=""><span><strong>${pair.rank}. ${escapeHtml(pair.name)}</strong><small>${escapeHtml(pair.description || 'Рекомендуемая синергия для этого пика.')}</small></span><b>→</b></button>`).join('')}</div></section>`;
+      return `<section class="drawer-section"><div class="drawer-section-title">Лучшие союзники · рейтинг DUO v3</div><div class="pair-list">${pairs.map(pair => `<button class="pair-row" type="button" data-open-exact-pair="${escapeHtml(item.name)}" data-pair-ally="${escapeHtml(pair.name)}"><img src="${escapeHtml(iconFor(pair.name))}" alt=""><span><strong>${pair.rank}. ${escapeHtml(pair.name)} · ${escapeHtml(pair.tier || '')} ${escapeHtml(pair.score || '')}</strong><small>${escapeHtml(pair.description || 'Рекомендуемая синергия для этого пика.')}</small></span><b>→</b></button>`).join('')}</div></section>`;
     }
-    return `<section class="drawer-section"><div class="drawer-section-title">Шесть тяжёлых предметов</div><ol class="duo-build-list">${(item.build || []).map(entry => `<li><span class="slot">${escapeHtml(entry.slot)}</span><span><strong>${escapeHtml(entry.item)}</strong>${entry.replacement ? `<small>→ ${escapeHtml(entry.replacement)}</small>` : ''}</span></li>`).join('')}</ol>${item.shard ? `<div class="shard-row">${escapeHtml(item.shard)}</div>` : ''}</section><section class="drawer-section"><div class="drawer-section-title">Быстрый выбор союзника</div><div class="pair-list">${(item.pairs || []).slice(0,4).map(pair => `<button class="pair-row" type="button" data-open-duo="${escapeHtml(pair.name)}"><img src="${escapeHtml(iconFor(pair.name))}" alt=""><span><strong>${pair.rank}. ${escapeHtml(pair.name)}</strong><small>${escapeHtml(pair.description || 'Один из лучших вариантов для этого персонажа.')}</small></span><b>→</b></button>`).join('')}</div></section>`;
+    return `<section class="drawer-section"><div class="drawer-section-title">${escapeHtml(item.buildLabel || 'Универсальный ДУО-закуп')}</div><ol class="duo-build-list">${(item.build || []).map(entry => `<li><span class="slot">${escapeHtml(entry.slot)}</span><span><strong>${escapeHtml(entry.item)}</strong>${entry.replacement ? `<small>→ ${escapeHtml(entry.replacement)}</small>` : ''}</span></li>`).join('')}</ol>${item.shard ? `<div class="shard-row">${escapeHtml(item.shard)}</div>` : ''}</section><section class="drawer-section"><div class="drawer-section-title">Выбери союзника — откроется точный закуп пары</div><div class="pair-list">${(item.pairs || []).slice(0,5).map(pair => `<button class="pair-row" type="button" data-open-exact-pair="${escapeHtml(item.name)}" data-pair-ally="${escapeHtml(pair.name)}"><img src="${escapeHtml(iconFor(pair.name))}" alt=""><span><strong>${pair.rank}. ${escapeHtml(pair.name)} · ${escapeHtml(pair.tier || '')} ${escapeHtml(pair.score || '')}</strong><small>${escapeHtml(pair.description || 'Один из лучших вариантов для этого персонажа.')}</small></span><b>→</b></button>`).join('')}</div></section>`;
   }
 
   function renderDrawerBody() {
     const item = state.drawerMode === 'solo' ? classByName.get(state.drawerName) : duoByName.get(state.drawerName);
     const body = $('#drawerBody');
     body.innerHTML = state.drawerMode === 'solo' ? renderSoloBody(item) : renderDuoBody(item);
-    $$('[data-open-duo]', body).forEach(button => button.addEventListener('click', () => openDrawer('duo', button.dataset.openDuo, 'build')));
+    $$('[data-open-exact-pair]', body).forEach(button => button.addEventListener('click', () => {
+      const pair = imbaByPair.get(pairKey(button.dataset.openExactPair, button.dataset.pairAlly));
+      if (pair) openAllBuilds(pair);
+    }));
     body.scrollTop = 0;
   }
 
@@ -352,17 +355,17 @@
     detail.innerHTML = `
       <div class="all-pair-title">
         <div class="all-pair-icons"><img src="${escapeHtml(iconFor(left))}" alt=""><img src="${escapeHtml(iconFor(right))}" alt=""></div>
-        <div><span>IMBA V2 · ПОЛНЫЙ ПЛАН</span><h3>${escapeHtml(left)} + ${escapeHtml(right)}</h3></div>
+        <div><span>DUO V3 · ТОЧНЫЙ ПЛАН ПАРЫ</span><h3>${escapeHtml(left)} + ${escapeHtml(right)}</h3></div>
         <span class="all-pair-score"><strong>${escapeHtml(pair.score)}</strong><small>${escapeHtml(pair.tier)} TIER</small></span>
       </div>
       <div class="all-pair-meta"><span><small>Командные предметы</small><strong>${escapeHtml(pair.holder)}</strong></span><span><small>Основной урон</small><strong>${escapeHtml(pair.carry)}</strong></span></div>
-      <section class="all-pair-note accent"><span>Почему это работает</span><p>${escapeHtml(pair.reason)}</p></section>
+      <section class="all-pair-note accent"><span>Почему работает</span><p>${escapeHtml(pair.reason)}</p></section>
       <div class="all-mode-switch" aria-label="Режим полного закупа">
         <button class="${state.allBuildsMode === 'pvp' ? 'active' : ''}" type="button" data-detail-mode="pvp">PvP <small>против игроков</small></button>
         <button class="${state.allBuildsMode === 'pve' ? 'active' : ''}" type="button" data-detail-mode="pve">PvE <small>против волн</small></button>
       </div>
       <div class="all-build-grid v2">${pairBuildCards(pair, state.allBuildsMode)}</div>
-      <section class="all-combo-section"><span>Порядок прокаста</span><ol class="combo-steps">${(pair.combo || []).map((step, index) => `<li><span>${String(index + 1).padStart(2, '0')}</span><p>${escapeHtml(cleanMarkdown(step))}</p></li>`).join('')}</ol></section>
+      <section class="all-combo-section"><span>Как разыгрывать</span><ol class="combo-steps">${(pair.combo || pair.how || []).map((step, index) => `<li><span>${String(index + 1).padStart(2, '0')}</span><p>${escapeHtml(cleanMarkdown(step))}</p></li>`).join('')}</ol></section>
     `;
     detail.scrollTop = 0;
   }
