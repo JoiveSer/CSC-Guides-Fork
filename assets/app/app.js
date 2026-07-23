@@ -301,7 +301,7 @@
   function renderDuoBody(item) {
     if (state.drawerTab === 'pairs') {
       const pairs = item.pairs || [];
-      return `<section class="drawer-section"><div class="drawer-section-title">Лучшие союзники · рейтинг DUO v3</div><div class="pair-list">${pairs.map(pair => `<button class="pair-row" type="button" data-open-exact-pair="${escapeHtml(item.name)}" data-pair-ally="${escapeHtml(pair.name)}"><img src="${escapeHtml(iconFor(pair.name))}" alt=""><span><strong>${pair.rank}. ${escapeHtml(pair.name)} · ${escapeHtml(pair.tier || '')} ${escapeHtml(pair.score || '')}</strong><small>${escapeHtml(pair.description || 'Рекомендуемая синергия для этого пика.')}</small></span><b>→</b></button>`).join('')}</div></section>`;
+      return `<section class="drawer-section"><div class="drawer-section-title">Лучшие союзники · рейтинг DUO v4</div><div class="pair-list">${pairs.map(pair => `<button class="pair-row" type="button" data-open-exact-pair="${escapeHtml(item.name)}" data-pair-ally="${escapeHtml(pair.name)}"><img src="${escapeHtml(iconFor(pair.name))}" alt=""><span><strong>${pair.rank}. ${escapeHtml(pair.name)} · ${escapeHtml(pair.tier || '')} ${escapeHtml(pair.score ?? '')}</strong><small>${escapeHtml(pair.description || 'Рекомендуемая синергия для этого пика.')}</small></span><b>→</b></button>`).join('')}</div></section>`;
     }
     return `<section class="drawer-section"><div class="drawer-section-title">${escapeHtml(item.buildLabel || 'Универсальный ДУО-закуп')}</div><ol class="duo-build-list">${(item.build || []).map(entry => `<li><span class="slot">${escapeHtml(entry.slot)}</span><span><strong>${escapeHtml(entry.item)}</strong>${entry.replacement ? `<small>→ ${escapeHtml(entry.replacement)}</small>` : ''}</span></li>`).join('')}</ol>${item.shard ? `<div class="shard-row">${escapeHtml(item.shard)}</div>` : ''}</section><section class="drawer-section"><div class="drawer-section-title">Выбери союзника — откроется точный закуп пары</div><div class="pair-list">${(item.pairs || []).slice(0,5).map(pair => `<button class="pair-row" type="button" data-open-exact-pair="${escapeHtml(item.name)}" data-pair-ally="${escapeHtml(pair.name)}"><img src="${escapeHtml(iconFor(pair.name))}" alt=""><span><strong>${pair.rank}. ${escapeHtml(pair.name)} · ${escapeHtml(pair.tier || '')} ${escapeHtml(pair.score || '')}</strong><small>${escapeHtml(pair.description || 'Один из лучших вариантов для этого персонажа.')}</small></span><b>→</b></button>`).join('')}</div></section>`;
   }
@@ -352,11 +352,27 @@
     const detail = $('#allBuildsDetail');
     if (!detail || !pair) return;
     const [left, right] = pair.pair;
+    const scoreLabels = {
+      combat: 'Индивидуальная боевая сила',
+      roleCoverage: 'Покрытие ролей',
+      controlRealization: 'Реализация контроля',
+      damageSynergy: 'Синергия урона',
+      sustain: 'Лечение и живучесть',
+      pveEconomy: 'PvE и экономика',
+      damageDiversity: 'Разнообразие типов урона',
+      reliability: 'Надёжность плана',
+      slotEfficiency: 'Эффективность слотов',
+      execution: 'Простота реализации'
+    };
+    const confidenceLabels = { high: 'высокая', medium: 'средняя', low: 'низкая' };
+    const breakdown = Object.entries(pair.scoreBreakdown || {});
+    const weaknesses = Array.isArray(pair.weaknesses) ? pair.weaknesses : [];
+    const adjustments = Array.isArray(pair.counterAdjustments) ? pair.counterAdjustments : [];
     detail.innerHTML = `
       <div class="all-pair-title">
         <div class="all-pair-icons"><img src="${escapeHtml(iconFor(left))}" alt=""><img src="${escapeHtml(iconFor(right))}" alt=""></div>
-        <div><span>DUO V3 · ТОЧНЫЙ ПЛАН ПАРЫ</span><h3>${escapeHtml(left)} + ${escapeHtml(right)}</h3></div>
-        <span class="all-pair-score"><strong>${escapeHtml(pair.score)}</strong><small>${escapeHtml(pair.tier)} TIER</small></span>
+        <div><span>DUO V4 · ТОЧНЫЙ ПЛАН ПАРЫ</span><h3>${escapeHtml(left)} + ${escapeHtml(right)}</h3></div>
+        <span class="all-pair-score"><strong>${escapeHtml(pair.score)}</strong><small>${escapeHtml(pair.tier)} TIER</small><small>Теоретическая оценка по механикам CSC 3.3, не серверный винрейт.</small></span>
       </div>
       <div class="all-pair-meta"><span><small>Командные предметы</small><strong>${escapeHtml(pair.holder)}</strong></span><span><small>Основной урон</small><strong>${escapeHtml(pair.carry)}</strong></span></div>
       <section class="all-pair-note accent"><span>Почему работает</span><p>${escapeHtml(pair.reason)}</p></section>
@@ -366,6 +382,13 @@
       </div>
       <div class="all-build-grid v2">${pairBuildCards(pair, state.allBuildsMode)}</div>
       <section class="all-combo-section"><span>Как разыгрывать</span><ol class="combo-steps">${(pair.combo || pair.how || []).map((step, index) => `<li><span>${String(index + 1).padStart(2, '0')}</span><p>${escapeHtml(cleanMarkdown(step))}</p></li>`).join('')}</ol></section>
+      <details class="all-combo-section">
+        <summary>Почему такая оценка</summary>
+        <p class="finder-reason">Уверенность: ${escapeHtml(confidenceLabels[pair.confidence] || pair.confidence || 'не указана')}. Шкала относительная: от 0.00 до 10.00 среди текущих 1891 сочетания.</p>
+        <ol class="combo-steps">${breakdown.map(([key, value], index) => `<li><span>${String(index + 1).padStart(2, '0')}</span><p>${escapeHtml(scoreLabels[key] || key)} — ${escapeHtml(value)}</p></li>`).join('')}</ol>
+      </details>
+      ${weaknesses.length ? `<section class="all-pair-note"><span>Слабые стороны</span><p>${weaknesses.map(escapeHtml).join(' · ')}</p></section>` : ''}
+      ${adjustments.length ? `<section class="all-combo-section"><span>Корректировки против контрпиков</span><ul class="note-list">${adjustments.map(item => `<li><strong>${escapeHtml(item.against)}</strong>: ${escapeHtml(item.change)}</li>`).join('')}</ul></section>` : ''}
     `;
     detail.scrollTop = 0;
   }
