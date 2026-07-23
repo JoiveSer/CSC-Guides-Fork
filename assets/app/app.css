@@ -2766,11 +2766,11 @@ kbd {
 .imba-pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .imba-pair-card {
   min-height: 102px;
-  padding: 14px 15px;
+  padding: 15px 16px;
   display: grid;
-  grid-template-columns: 30px auto minmax(0, 1fr) auto;
+  grid-template-columns: 24px 72px minmax(0, 1fr) 54px;
   align-items: center;
-  gap: 13px;
+  gap: 12px;
   border: 1px solid var(--line);
   border-radius: 14px 4px 14px 14px;
   background: var(--surface);
@@ -2781,8 +2781,14 @@ kbd {
 }
 .imba-pair-card:hover { transform: translateY(-3px); border-color: rgba(var(--cyan-rgb), .32); background: var(--surface-2); }
 .imba-pair-rank { color: var(--soft); font: 650 10px var(--font); }
-.imba-pair-card .pair-icons img { width: 48px; height: 48px; border: 2px solid var(--surface); border-radius: 12px 3px 12px 12px; image-rendering: pixelated; }
-.imba-pair-card .pair-icons img + img { margin-left: -9px; transform: translateY(5px); }
+.imba-pair-card .pair-icons {
+  grid-row: auto;
+  width: 72px;
+  min-width: 72px;
+  align-items: center;
+}
+.imba-pair-card .pair-icons img { width: 42px; height: 42px; flex: 0 0 42px; border: 2px solid var(--surface); border-radius: 12px 3px 12px 12px; image-rendering: pixelated; }
+.imba-pair-card .pair-icons img + img { margin-left: -14px; transform: translateY(5px); }
 .imba-pair-copy { min-width: 0; }
 .imba-pair-copy strong,
 .imba-pair-copy small { display: block; }
@@ -2796,23 +2802,31 @@ kbd {
 
 .finder-product {
   margin-top: 110px;
-  padding: clamp(28px, 5vw, 68px);
+  padding: clamp(34px, 4.3vw, 58px);
   display: grid;
-  grid-template-columns: .72fr 1.28fr;
-  gap: clamp(44px, 7vw, 100px);
-  align-items: center;
+  grid-template-columns: minmax(280px, .78fr) minmax(520px, 1.22fr);
+  gap: clamp(42px, 5vw, 72px);
+  align-items: stretch;
   border: 1px solid var(--line-strong);
   border-radius: 8px 34px 8px 34px;
   background: linear-gradient(135deg, var(--surface), var(--surface-2));
   box-shadow: var(--shadow);
 }
-.finder-product-copy p { margin: 25px 0 30px; color: var(--muted); }
-.battle-plan { padding: 22px; border: 1px solid var(--line); border-radius: 18px 5px 18px 18px; background: rgba(0,0,0,.16); }
+.finder-product-copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+.finder-product-copy h2 { max-width: 430px; font-size: clamp(46px, 4.7vw, 68px); }
+.finder-product-copy h2 em { white-space: nowrap; }
+.finder-product-copy p { max-width: 410px; margin: 25px 0 30px; color: var(--muted); }
+.battle-plan { min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 18px 5px 18px 18px; background: rgba(0,0,0,.16); }
 .battle-plan-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-.battle-plan-head > span:first-child small,
-.battle-plan-head > span:first-child strong { display: block; }
-.battle-plan-head > span:first-child small { color: var(--cyan); font-size: 8px; font-weight: 750; letter-spacing: .12em; }
-.battle-plan-head > span:first-child strong { margin-top: 3px; font-size: 18px; }
+.battle-plan-title { min-width: 0; display: flex; align-items: center; gap: 13px; }
+.battle-plan-title > span:last-child { min-width: 0; }
+.battle-plan-title small,
+.battle-plan-title strong { display: block; }
+.battle-plan-title small { color: var(--cyan); font-size: 8px; font-weight: 750; letter-spacing: .12em; }
+.battle-plan-title strong { margin-top: 3px; overflow: hidden; font-size: 18px; text-overflow: ellipsis; white-space: nowrap; }
+.battle-plan-icons { width: 62px; min-width: 62px; display: flex; align-items: center; }
+.battle-plan-icons img { width: 38px; height: 38px; flex: 0 0 38px; border: 2px solid var(--surface); border-radius: 11px 3px 11px 11px; image-rendering: pixelated; }
+.battle-plan-icons img + img { margin-left: -14px; transform: translateY(4px); }
 .score-orb { min-width: 62px; height: 62px; display: grid; place-content: center; border: 1px solid rgba(var(--cyan-rgb), .25); border-radius: 50%; color: var(--cyan); font: 650 20px var(--display); text-align: center; }
 .score-orb small { display: block; color: var(--soft); font: 600 8px var(--font); }
 .battle-roles { margin: 18px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -2825,6 +2839,17 @@ kbd {
 .combo-steps li { padding: 12px 0; display: grid; grid-template-columns: 29px 1fr; gap: 10px; border-top: 1px solid var(--line); }
 .combo-steps li > span { width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid rgba(var(--cyan-rgb), .2); border-radius: 7px 2px 7px 7px; color: var(--cyan); font-size: 8px; font-weight: 750; }
 .combo-steps p { margin: 1px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.battle-metrics { margin: 0 0 9px; padding: 13px 14px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; border: 1px solid var(--line); border-radius: 10px 3px 10px 10px; background: rgba(255,255,255,.018); }
+.battle-metrics > span { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 5px 8px; }
+.battle-metrics small { color: var(--soft); font-size: 8px; font-weight: 700; }
+.battle-metrics strong { color: var(--text); font-size: 9px; }
+.battle-metrics i { grid-column: 1 / -1; height: 3px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.07); }
+.battle-metrics b { height: 100%; display: block; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), var(--amber)); }
+.battle-insights { margin: 0; padding: 0; list-style: none; }
+.battle-insights li { padding: 11px 0; display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 11px; border-top: 1px solid var(--line); }
+.battle-insights li > span { width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid rgba(var(--cyan-rgb), .2); border-radius: 7px 2px 7px 7px; color: var(--cyan); font-size: 8px; font-weight: 750; }
+.battle-insights small { display: block; margin: 1px 0 3px; color: var(--soft); font-size: 7px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+.battle-insights p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.48; }
 
 .compact-routes { margin-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .compact-routes button { min-height: 92px; padding: 16px; display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 13px 4px 13px 13px; background: transparent; color: var(--text); text-align: left; cursor: pointer; }
@@ -2860,6 +2885,7 @@ kbd {
   .finder-intro { max-width: 760px; }
   .duo-finder { width: 100%; }
   .finder-product { grid-template-columns: 1fr; }
+  .finder-product-copy h2 { max-width: 680px; }
 }
 
 @media (max-width: 760px) {
@@ -2880,18 +2906,26 @@ kbd {
   .finder-builds { grid-template-columns: 1fr; }
   .finder-actions { align-items: stretch; flex-direction: column; }
   .finder-actions .button { width: 100%; }
-  .finder-proof .container { min-height: 52px; justify-content: flex-start; overflow: auto; white-space: nowrap; }
+  .finder-proof .container { min-height: 52px; justify-content: flex-start; overflow: auto; scrollbar-width: none; white-space: nowrap; }
+  .finder-proof .container::-webkit-scrollbar { display: none; }
   .finder-section { padding-top: 78px; }
   .finder-section-head { grid-template-columns: 1fr; gap: 18px; }
   .finder-section-head h2,
   .finder-product-copy h2 { font-size: 42px; }
   .imba-pair-grid { grid-template-columns: 1fr; }
-  .imba-pair-card { grid-template-columns: 24px auto minmax(0, 1fr) auto; padding: 11px; }
-  .imba-pair-card .pair-icons img { width: 41px; height: 41px; }
+  .imba-pair-card { grid-template-columns: 20px 60px minmax(0, 1fr) 48px; gap: 9px; padding: 11px; }
+  .imba-pair-card .pair-icons { width: 60px; min-width: 60px; }
+  .imba-pair-card .pair-icons img { width: 37px; height: 37px; flex-basis: 37px; }
+  .imba-pair-card .pair-icons img + img { margin-left: -14px; transform: translateY(4px); }
   .imba-pair-copy small { max-width: 40vw; }
   .finder-product { margin-top: 78px; padding: 25px 17px; gap: 34px; border-radius: 6px 22px 6px 22px; }
+  .finder-product-copy h2 { font-size: 42px; }
+  .finder-product-copy h2 em { white-space: normal; }
   .battle-plan { padding: 15px; }
   .battle-roles { grid-template-columns: 1fr; }
+  .battle-metrics { grid-template-columns: 1fr; gap: 9px; }
+  .battle-plan-title strong { font-size: 15px; }
+  .battle-plan-icons { display: none; }
   .compact-routes { grid-template-columns: 1fr; }
   .all-pair-title { align-items: flex-start; flex-wrap: wrap; }
   .all-pair-title .all-pair-score { margin-left: 0; }
@@ -3080,6 +3114,33 @@ body::before {
   .footer-socials a { height: 44px; }
   .mobile-menu-nav button { min-height: 69px; }
   .page-heading h1 { font-size: 51px; }
+  .finder-intro { width: 100%; min-width: 0; }
+  .finder-intro h1 { width: 100%; font-size: clamp(42px, 11.8vw, 48px); letter-spacing: -.055em; }
+  .finder-intro > p { max-width: 340px; }
+  .finder-orbit span { display: none !important; }
+  .release-chip { max-width: 100%; padding-inline: 9px; font-size: 8px; letter-spacing: .075em; white-space: nowrap; }
+  .finder-metrics { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .finder-metrics > span { padding: 10px 5px; }
+  .finder-metrics small { font-size: 6px; }
+  .finder-product-copy h2 { font-size: 38px; }
+  .imba-pair-card { grid-template-columns: 16px 54px minmax(0, 1fr) 43px; gap: 7px; }
+  .imba-pair-card .pair-icons { width: 54px; min-width: 54px; }
+  .imba-pair-card .pair-icons img { width: 34px; height: 34px; flex-basis: 34px; }
+  .imba-pair-card .pair-icons img + img { margin-left: -14px; }
+  .imba-score { min-width: 43px; }
+  .imba-score strong { font-size: 18px; }
+  .imba-pair-copy small { max-width: none; }
+}
+
+@media (max-width: 520px) {
+  .finder-intro { width: 100%; min-width: 0; }
+  .finder-intro h1 { width: 100%; font-size: clamp(42px, 11.8vw, 48px); letter-spacing: -.055em; }
+  .finder-intro > p { max-width: 340px; }
+  .finder-orbit span { display: none !important; }
+  .release-chip { max-width: 100%; padding-inline: 9px; font-size: 8px; letter-spacing: .075em; white-space: nowrap; }
+  .finder-metrics { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .finder-metrics > span { padding: 10px 5px; }
+  .finder-metrics small { font-size: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

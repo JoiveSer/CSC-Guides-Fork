@@ -178,12 +178,36 @@
 
   function battlePlanMarkup(pair) {
     if (!pair) return '';
+    const [left, right] = pair.pair;
+    const breakdown = pair.scoreBreakdown || {};
+    const plan = [
+      ['Синергия', pair.reason],
+      ['Экономика', pair.midasPlan],
+      ['Риск', (pair.weaknesses || []).join('; ')],
+      [
+        pair.counterAdjustments?.[0]?.against ? `Против: ${pair.counterAdjustments[0].against}` : 'Контр-план',
+        pair.counterAdjustments?.[0]?.change
+      ]
+    ].filter(([, copy]) => copy);
+    const metrics = [
+      ['PvP', breakdown.pvpStrength],
+      ['PvE', breakdown.pveStrength],
+      ['Надёжность', breakdown.reliability]
+    ].filter(([, value]) => Number.isFinite(Number(value)));
+
     return `<div class="battle-plan-head">
-        <span><small>РОЛИ В ПАРЕ</small><strong>${escapeHtml(pair.pair.join(' + '))}</strong></span>
+        <span class="battle-plan-title">
+          <span class="battle-plan-icons"><img src="${escapeHtml(iconFor(left))}" alt=""><img src="${escapeHtml(iconFor(right))}" alt=""></span>
+          <span><small>ПЛАН ДЛЯ ВЫБРАННОЙ ПАРЫ</small><strong>${escapeHtml(pair.pair.join(' + '))}</strong></span>
+        </span>
         <span class="score-orb">${escapeHtml(pair.score)}<small>/ 10</small></span>
       </div>
       <div class="battle-roles"><span><small>Держит командные</small><strong>${escapeHtml(pair.holder)}</strong></span><span><small>Основной урон</small><strong>${escapeHtml(pair.carry)}</strong></span></div>
-      <ol class="combo-steps">${(pair.combo || []).map((step, index) => `<li><span>${String(index + 1).padStart(2, '0')}</span><p>${escapeHtml(cleanMarkdown(step))}</p></li>`).join('')}</ol>`;
+      ${metrics.length ? `<div class="battle-metrics">${metrics.map(([label, value]) => {
+        const score = Math.max(0, Math.min(10, Number(value)));
+        return `<span><small>${escapeHtml(label)}</small><i><b style="width:${score * 10}%"></b></i><strong>${escapeHtml(score.toFixed(1))}</strong></span>`;
+      }).join('')}</div>` : ''}
+      <ol class="battle-insights">${plan.map(([label, copy], index) => `<li><span>${String(index + 1).padStart(2, '0')}</span><div><small>${escapeHtml(label)}</small><p>${escapeHtml(cleanMarkdown(copy))}</p></div></li>`).join('')}</ol>`;
   }
 
   function renderHome() {
