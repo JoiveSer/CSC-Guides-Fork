@@ -31,7 +31,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -84,7 +84,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Перо Грифона <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -139,7 +139,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -189,7 +189,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Маска чародея <span class=\"pve-replace\">→ Гибельник (ПВЕ)</span>",
@@ -242,7 +242,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -296,7 +296,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -347,7 +347,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард (если вам выпала стрела слабости)",
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -401,7 +401,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -453,7 +453,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -506,7 +506,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -557,7 +557,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -611,7 +611,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -664,7 +664,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -717,7 +717,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -770,7 +770,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Сбрасыватель",
             "2. Маска чародея",
@@ -822,7 +822,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -874,7 +874,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -925,7 +925,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Маска чародея <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -977,7 +977,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1028,7 +1028,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Сбрасыватель",
             "2. Маска чародея",
@@ -1082,7 +1082,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Этериальное одеяло <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -1137,7 +1137,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1189,7 +1189,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Сбрасыватель <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Маска чародея",
@@ -1241,7 +1241,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -1294,7 +1294,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1345,7 +1345,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1397,7 +1397,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1449,7 +1449,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1501,7 +1501,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1553,7 +1553,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1605,7 +1605,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Перо Грифона <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -1658,7 +1658,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1711,7 +1711,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1764,7 +1764,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Перо Грифона <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -1816,7 +1816,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1869,7 +1869,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1922,7 +1922,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -1975,7 +1975,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -2028,7 +2028,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2079,7 +2079,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2130,7 +2130,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2181,7 +2181,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2232,7 +2232,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2285,7 +2285,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2339,7 +2339,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -2393,7 +2393,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2446,7 +2446,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2498,7 +2498,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Секира",
@@ -2551,7 +2551,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2602,7 +2602,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2655,7 +2655,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2707,7 +2707,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2758,7 +2758,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2810,7 +2810,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -2863,7 +2863,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "Шард",
             "1. Перо Грифона <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -2916,7 +2916,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки",
             "2. Секира",
@@ -2968,7 +2968,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -3021,7 +3021,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Секира",
             "2. Часы <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
@@ -3075,7 +3075,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -3128,7 +3128,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -3179,7 +3179,7 @@ window.CSK_OFFLINE_DATA = {
           ]
         },
         {
-          "title": "Закуп от Лингидана",
+          "title": "Закуп от Joive",
           "items": [
             "1. Стальные ботинки <span class=\"pve-replace\">→ Мидас (ПВЕ)</span>",
             "2. Секира",
@@ -3205,7 +3205,7 @@ window.CSK_OFFLINE_DATA = {
   "tips": [
     {
       "category": "предметы",
-      "title": "Сборка для высоких волн от Лингидана",
+      "title": "Сборка для высоких волн от Joive",
       "content": "Сборка для прохождения высоких волн (Без пуша) Тяжёлые предметы: 1. Мидас 2. Секира (криты) 3. Боевое кольцо (криты) 4. Мракобесец/Гибельник (буст к урону по мобам) 5. Шлем ледяного короля (стакается с зельем замедления) 6. Стальные ботинки Мидас можно менять на часы или другой предмет по ситуации для дуэли Обязательно иметь: 1. Топ меч (или меч на бич + кару) 2. Замедление 3. Щиты 2–3 4. Огнестойкость 5. Зелье регенерации",
       "important": true
     },
@@ -3319,13 +3319,6 @@ window.CSK_OFFLINE_DATA = {
     }
   ],
   "useful": [
-    {
-      "category": "Донат сервисы",
-      "title": "Donatepay",
-      "description": "",
-      "url": "https://donatepay.ru/don/Lingidan",
-      "important": false
-    },
     {
       "category": "VPN",
       "title": "Horizon VPS",
