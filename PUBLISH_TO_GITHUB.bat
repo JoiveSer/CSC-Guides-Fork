@@ -41,8 +41,23 @@ if not exist "assets\app\app.css" (
   pause
   exit /b 1
 )
-if not exist "data\duo-data.js" (
-  echo ERROR: DUO data was not found.
+if not exist "data\offline-data.js" (
+  echo ERROR: SOLO data was not found.
+  pause
+  exit /b 1
+)
+if not exist "data\duo-authoritative-v3.js" (
+  echo ERROR: Full DUO V5 data was not found.
+  pause
+  exit /b 1
+)
+if not exist "data\duo-summary-v3.js" (
+  echo ERROR: Quick DUO V5 data was not found.
+  pause
+  exit /b 1
+)
+if not exist "data\v5-meta.js" (
+  echo ERROR: V5 tierlist and methodology were not found.
   pause
   exit /b 1
 )
@@ -61,7 +76,7 @@ git -C "%TMP%" init -q
 git -C "%TMP%" config user.name "JoiveSer"
 git -C "%TMP%" config user.email "JoiveSer@users.noreply.github.com"
 git -C "%TMP%" add .
-git -C "%TMP%" commit -q -m "Minimal responsive CSC Guide update"
+git -C "%TMP%" commit -q -m "Publish CSC 3.3 V5 guide"
 git -C "%TMP%" branch -M main
 git -C "%TMP%" remote add origin "%REPO%"
 

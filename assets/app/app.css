@@ -1565,6 +1565,7 @@ kbd {
 }
 
 .character-card {
+  position: relative;
   min-width: 0;
   padding: 0;
   border: 0;
@@ -1573,6 +1574,26 @@ kbd {
   text-align: center;
   cursor: pointer;
 }
+
+.character-tier-badge {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  padding: 4px 6px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  border: 1px solid rgba(var(--cyan-rgb), 0.28);
+  border-radius: 7px 2px 7px 7px;
+  background: rgba(5, 9, 13, 0.82);
+  color: var(--text);
+  font-style: normal;
+  line-height: 1;
+  backdrop-filter: blur(8px);
+}
+
+.character-tier-badge b { color: var(--cyan); font-size: 9px; }
+.character-tier-badge small { color: var(--muted); font-size: 8px; }
 
 .character-card img {
   width: 100%;
@@ -1911,6 +1932,53 @@ kbd {
 }
 
 .build-card h3 { margin: 0 0 8px; }
+
+.v5-profile {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.v5-profile > span {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px 3px 10px 10px;
+  background: var(--surface);
+}
+
+.v5-profile small,
+.v5-profile strong { display: block; }
+.v5-profile small { color: var(--soft); font-size: 8px; letter-spacing: .1em; }
+.v5-profile strong { margin-top: 4px; overflow: hidden; color: var(--text); font-size: 16px; text-overflow: ellipsis; white-space: nowrap; }
+.v5-profile strong i { margin-left: 2px; color: var(--soft); font-size: 9px; font-style: normal; }
+.v5-explanation { margin: 14px 0 0; color: var(--muted); font-size: 12px; line-height: 1.65; }
+
+.v5-metrics {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.v5-metrics > span {
+  position: relative;
+  padding: 10px 11px 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px 2px 8px 8px;
+}
+
+.v5-metrics small { color: var(--muted); font-size: 9px; }
+.v5-metrics strong { color: var(--text); font-size: 11px; }
+.v5-metrics i { position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--cyan) var(--metric), var(--line) 0); }
+.note-list.is-warning li::before { background: #e0a15d; }
+.v5-method-note { padding: 15px; border: 1px solid var(--line); border-radius: 11px 3px 11px 11px; background: rgba(var(--cyan-rgb), .035); }
+.v5-method-note p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .pair-list { display: grid; gap: 7px; }
 
 .pair-row {

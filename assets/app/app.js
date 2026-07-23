@@ -4,10 +4,12 @@
   const offline = window.CSK_OFFLINE_DATA || { classes: [], tips: [], useful: [] };
   const duo = window.CSK_DUO_DATA_V3 || { classes: [], topPairs: [], rules: [] };
   const allDuo = window.CSK_DUO_V3 || { pair_count: 0, characters: [], topPairs: [], pairs: [] };
+  const v5Meta = window.CSK_V5_META || { characterTierlist: [], methodology: {} };
   const classes = Array.isArray(offline.classes) ? offline.classes : [];
   const duoClasses = Array.isArray(duo.classes) ? duo.classes : [];
   const classByName = new Map(classes.map(item => [item.name, item]));
   const duoByName = new Map(duoClasses.map(item => [item.name, item]));
+  const tierByName = new Map((v5Meta.characterTierlist || []).map(item => [item.name, item]));
   const imbaPairs = Array.isArray(allDuo.pairs) ? allDuo.pairs : [];
   const imbaCharacters = Array.isArray(allDuo.characters) ? allDuo.characters : [];
   const pairKey = (left, right) => [left, right].sort((a, b) => a.localeCompare(b, 'ru')).join('\u0000');
@@ -120,10 +122,11 @@
 
   function makeCharacterCard(item, mode) {
     const button = document.createElement('button');
+    const tier = item.v5 || tierByName.get(item.name);
     button.type = 'button';
     button.className = 'character-card';
     button.dataset.name = item.name;
-    button.innerHTML = `<img src="${escapeHtml(iconFor(item.name))}" alt="" loading="lazy"><strong title="${escapeHtml(item.name)}">${escapeHtml(item.name)}</strong>`;
+    button.innerHTML = `<img src="${escapeHtml(iconFor(item.name))}" alt="" loading="lazy">${tier ? `<em class="character-tier-badge"><b>${escapeHtml(tier.tier)}</b><small>${escapeHtml(tier.score)}</small></em>` : ''}<strong title="${escapeHtml(item.name)}">${escapeHtml(item.name)}</strong>`;
     button.addEventListener('click', () => openDrawer(mode, item.name));
     return button;
   }
@@ -276,7 +279,7 @@
 
   function renderDrawerTabs() {
     const tabs = state.drawerMode === 'solo'
-      ? [['builds','Закупы'],['tips','Советы'],['counters','Контры']]
+      ? [['builds','Закупы'],['analysis','Анализ V5'],['tips','Советы'],['counters','Контры']]
       : [['build','Закуп'],['pairs','Лучшие пары']];
     $('#drawerTabs').replaceChildren(...tabs.map(([id, label]) => {
       const button = document.createElement('button');
@@ -288,7 +291,51 @@
     }));
   }
 
+  function renderSoloAnalysis(item) {
+    const data = item.v5;
+    if (!data) return '<p class="empty-state">Для этого персонажа пока нет анализа V5.</p>';
+    const metricLabels = {
+      pvp: 'PvP',
+      pve: 'PvE',
+      damage: 'Урон',
+      survivability: 'Живучесть',
+      mobility: 'Мобильность',
+      control: 'Контроль',
+      economy: 'Экономика',
+      stability: 'Стабильность',
+      soloStrength: 'Сила SOLO',
+      duoStrength: 'Сила DUO'
+    };
+    const confidenceLabels = { high: 'высокая', medium: 'средняя', low: 'низкая' };
+    const metrics = Object.entries(data.metrics || {}).filter(([key]) => metricLabels[key]);
+    const list = (title, values, tone = '') => values?.length
+      ? `<section class="drawer-section"><div class="drawer-section-title">${escapeHtml(title)}</div><ul class="note-list ${tone}">${values.map(value => `<li>${escapeHtml(value)}</li>`).join('')}</ul></section>`
+      : '';
+    return `
+      <section class="drawer-section">
+        <div class="v5-profile">
+          <span><small>ТИР V5</small><strong>${escapeHtml(data.tier)}</strong></span>
+          <span><small>ОЦЕНКА</small><strong>${escapeHtml(data.score)}<i>/10</i></strong></span>
+          <span><small>ЛУЧШИЙ ФОРМАТ</small><strong>${escapeHtml(data.bestFormat)}</strong></span>
+          <span><small>УВЕРЕННОСТЬ</small><strong>${escapeHtml(confidenceLabels[data.confidence] || data.confidence)}</strong></span>
+        </div>
+        <p class="v5-explanation">${escapeHtml(data.explanation || data.logic)}</p>
+        <div class="v5-metrics">${metrics.map(([key, value]) => `<span><small>${escapeHtml(metricLabels[key])}</small><strong>${escapeHtml(value)}</strong><i style="--metric:${Math.max(0, Math.min(100, (Number(value) || 0) * 10))}%"></i></span>`).join('')}</div>
+      </section>
+      ${list('Сильные стороны', data.strengths)}
+      ${list('Слабые стороны', data.weaknesses, 'is-warning')}
+      ${list('Ядро сборки', data.coreItems)}
+      ${list('Лёгкие и расходные предметы', data.keyLightItems)}
+      ${list('Ситуативные предметы', data.situationalItems)}
+      ${list('Не покупать слишком рано', data.badEarlyPurchases, 'is-warning')}
+      <section class="drawer-section v5-method-note">
+        <div class="drawer-section-title">Как читать оценку</div>
+        <p>${escapeHtml(v5Meta.methodology?.scale || offline.dataDisclaimer || '')}</p>
+      </section>`;
+  }
+
   function renderSoloBody(item) {
+    if (state.drawerTab === 'analysis') return renderSoloAnalysis(item);
     if (state.drawerTab === 'tips' || state.drawerTab === 'counters') {
       const values = item[state.drawerTab] || [];
       const title = state.drawerTab === 'tips' ? 'Советы по персонажу' : 'Как контрить';
@@ -301,7 +348,7 @@
   function renderDuoBody(item) {
     if (state.drawerTab === 'pairs') {
       const pairs = item.pairs || [];
-      return `<section class="drawer-section"><div class="drawer-section-title">Лучшие союзники · рейтинг DUO v4</div><div class="pair-list">${pairs.map(pair => `<button class="pair-row" type="button" data-open-exact-pair="${escapeHtml(item.name)}" data-pair-ally="${escapeHtml(pair.name)}"><img src="${escapeHtml(iconFor(pair.name))}" alt=""><span><strong>${pair.rank}. ${escapeHtml(pair.name)} · ${escapeHtml(pair.tier || '')} ${escapeHtml(pair.score ?? '')}</strong><small>${escapeHtml(pair.description || 'Рекомендуемая синергия для этого пика.')}</small></span><b>→</b></button>`).join('')}</div></section>`;
+      return `<section class="drawer-section"><div class="drawer-section-title">Лучшие союзники · рейтинг DUO V5</div><div class="pair-list">${pairs.map(pair => `<button class="pair-row" type="button" data-open-exact-pair="${escapeHtml(item.name)}" data-pair-ally="${escapeHtml(pair.name)}"><img src="${escapeHtml(iconFor(pair.name))}" alt=""><span><strong>${pair.rank}. ${escapeHtml(pair.name)} · ${escapeHtml(pair.tier || '')} ${escapeHtml(pair.score ?? '')}</strong><small>${escapeHtml(pair.description || 'Рекомендуемая синергия для этого пика.')}</small></span><b>→</b></button>`).join('')}</div></section>`;
     }
     return `<section class="drawer-section"><div class="drawer-section-title">${escapeHtml(item.buildLabel || 'Универсальный ДУО-закуп')}</div><ol class="duo-build-list">${(item.build || []).map(entry => `<li><span class="slot">${escapeHtml(entry.slot)}</span><span><strong>${escapeHtml(entry.item)}</strong>${entry.replacement ? `<small>→ ${escapeHtml(entry.replacement)}</small>` : ''}</span></li>`).join('')}</ol>${item.shard ? `<div class="shard-row">${escapeHtml(item.shard)}</div>` : ''}</section><section class="drawer-section"><div class="drawer-section-title">Выбери союзника — откроется точный закуп пары</div><div class="pair-list">${(item.pairs || []).slice(0,5).map(pair => `<button class="pair-row" type="button" data-open-exact-pair="${escapeHtml(item.name)}" data-pair-ally="${escapeHtml(pair.name)}"><img src="${escapeHtml(iconFor(pair.name))}" alt=""><span><strong>${pair.rank}. ${escapeHtml(pair.name)} · ${escapeHtml(pair.tier || '')} ${escapeHtml(pair.score || '')}</strong><small>${escapeHtml(pair.description || 'Один из лучших вариантов для этого персонажа.')}</small></span><b>→</b></button>`).join('')}</div></section>`;
   }
@@ -353,16 +400,17 @@
     if (!detail || !pair) return;
     const [left, right] = pair.pair;
     const scoreLabels = {
-      combat: 'Индивидуальная боевая сила',
-      roleCoverage: 'Покрытие ролей',
-      controlRealization: 'Реализация контроля',
-      damageSynergy: 'Синергия урона',
-      sustain: 'Лечение и живучесть',
-      pveEconomy: 'PvE и экономика',
-      damageDiversity: 'Разнообразие типов урона',
+      pvpStrength: 'Сила в PvP',
+      pveStrength: 'Сила в PvE',
+      earlyStrength: 'Ранняя игра',
+      lateStrength: 'Поздняя игра',
+      control: 'Контроль',
+      damage: 'Урон',
+      survivability: 'Живучесть',
+      economy: 'Экономика',
       reliability: 'Надёжность плана',
-      slotEfficiency: 'Эффективность слотов',
-      execution: 'Простота реализации'
+      executionDifficulty: 'Сложность реализации',
+      counterability: 'Уязвимость к контрпикам'
     };
     const confidenceLabels = { high: 'высокая', medium: 'средняя', low: 'низкая' };
     const breakdown = Object.entries(pair.scoreBreakdown || {});
@@ -371,11 +419,12 @@
     detail.innerHTML = `
       <div class="all-pair-title">
         <div class="all-pair-icons"><img src="${escapeHtml(iconFor(left))}" alt=""><img src="${escapeHtml(iconFor(right))}" alt=""></div>
-        <div><span>DUO V4 · ТОЧНЫЙ ПЛАН ПАРЫ</span><h3>${escapeHtml(left)} + ${escapeHtml(right)}</h3></div>
-        <span class="all-pair-score"><strong>${escapeHtml(pair.score)}</strong><small>${escapeHtml(pair.tier)} TIER</small><small>Теоретическая оценка по механикам CSC 3.3, не серверный винрейт.</small></span>
+        <div><span>DUO V5 · ТОЧНЫЙ ПЛАН ПАРЫ</span><h3>${escapeHtml(left)} + ${escapeHtml(right)}</h3></div>
+        <span class="all-pair-score"><strong>${escapeHtml(pair.score)}</strong><small>${escapeHtml(pair.tier)} TIER</small><small>Теоретическая редакционная оценка механик CSC 3.3, не серверный винрейт.</small></span>
       </div>
       <div class="all-pair-meta"><span><small>Командные предметы</small><strong>${escapeHtml(pair.holder)}</strong></span><span><small>Основной урон</small><strong>${escapeHtml(pair.carry)}</strong></span></div>
       <section class="all-pair-note accent"><span>Почему работает</span><p>${escapeHtml(pair.reason)}</p></section>
+      ${pair.roleOfPair ? `<section class="all-pair-note"><span>Формат пары</span><p>${escapeHtml(pair.roleOfPair)}</p></section>` : ''}
       <div class="all-mode-switch" aria-label="Режим полного закупа">
         <button class="${state.allBuildsMode === 'pvp' ? 'active' : ''}" type="button" data-detail-mode="pvp">PvP <small>против игроков</small></button>
         <button class="${state.allBuildsMode === 'pve' ? 'active' : ''}" type="button" data-detail-mode="pve">PvE <small>против волн</small></button>
@@ -384,7 +433,7 @@
       <section class="all-combo-section"><span>Как разыгрывать</span><ol class="combo-steps">${(pair.combo || pair.how || []).map((step, index) => `<li><span>${String(index + 1).padStart(2, '0')}</span><p>${escapeHtml(cleanMarkdown(step))}</p></li>`).join('')}</ol></section>
       <details class="all-combo-section">
         <summary>Почему такая оценка</summary>
-        <p class="finder-reason">Уверенность: ${escapeHtml(confidenceLabels[pair.confidence] || pair.confidence || 'не указана')}. Шкала относительная: от 0.00 до 10.00 среди текущих 1891 сочетания.</p>
+        <p class="finder-reason">Уверенность: ${escapeHtml(confidenceLabels[pair.confidence] || pair.confidence || 'не указана')}. Шкала V5 абсолютная редакционная: соседние позиции не являются статистически доказанными.</p>
         <ol class="combo-steps">${breakdown.map(([key, value], index) => `<li><span>${String(index + 1).padStart(2, '0')}</span><p>${escapeHtml(scoreLabels[key] || key)} — ${escapeHtml(value)}</p></li>`).join('')}</ol>
       </details>
       ${weaknesses.length ? `<section class="all-pair-note"><span>Слабые стороны</span><p>${weaknesses.map(escapeHtml).join(' · ')}</p></section>` : ''}
@@ -419,7 +468,7 @@
     const entries = topImbaPairs.concat(imbaPairs.filter(pair => pair.pair?.[0] === pair.pair?.[1])).map((pair, index) => ({
       pair,
       index,
-      search: [pair.pair?.join(' '), pair.tier, pair.reason, pair.holder, pair.carry, ...(pair.combo || []), ...Object.values(pair.pvp || {}).flat(), ...Object.values(pair.pve || {}).flat()].join(' ').toLocaleLowerCase('ru')
+      search: [pair.pair?.join(' '), pair.tier, pair.roleOfPair, pair.reason, pair.holder, pair.carry, ...(pair.combo || []), ...(pair.weaknesses || []), ...(pair.counterAdjustments || []).flatMap(item => [item.against, item.change]), ...Object.values(pair.pvp || {}).flat(), ...Object.values(pair.pve || {}).flat()].join(' ').toLocaleLowerCase('ru')
     }));
 
     const selectPair = index => {
